@@ -10,7 +10,7 @@ wordle を（最適に？）解くツール
 $ python3 wordle.py word1 colors1 word2 colors2 ...
 ```
 
-### colors
+### colors format
 
 ```
 G: GREEN
