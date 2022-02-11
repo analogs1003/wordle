@@ -41,7 +41,7 @@ flump 2.6015683031684986
 
 - 登録されている単語一覧  
   https://github.com/alex1770/wordle/blob/main/wordlist_all
-- 答えとして選ばれる単語一覧
+- 答えとして選ばれる単語一覧  
   https://github.com/alex1770/wordle/blob/main/wordlist_hidden
 
 ## 解き方
