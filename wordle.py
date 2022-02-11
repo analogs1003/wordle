@@ -58,30 +58,32 @@ def calc_rule_type(answer_word, input_word):
     rule_type = ''.join(rule_type)
     return rule_type
 
-# all_word_listから選んだwordのエントロピー（hidden_word_listのばらけぐあい）を求める
-def calc_entropy(word, hidden_word_list):
+def get_word_count_dict(word, hidden_word_list):
     # rule_typeごとのhidden_wordを数える
-    word_count = {}
+    word_count_dict = {}
     for hidden_word in hidden_word_list:
         # 正解がhidden_wordだったときwordを入力したときのrule_typeを求める
         rule_type = calc_rule_type(hidden_word, word)
         # rule_type別にword数を数える
-        if rule_type in word_count:
-            word_count[rule_type] += 1
+        if rule_type in word_count_dict:
+            word_count_dict[rule_type] += 1
         else:
-            word_count[rule_type] = 1
-    
+            word_count_dict[rule_type] = 1
+    return word_count_dict
+
+# word_count_dictからエントロピー（hidden_word_listのばらけぐあい）を求める
+def calc_entropy(word_count_dict):
     # rule_typeごとの確率を求める
     sum = 0
-    for rule_type in word_count.keys():
-        sum += word_count[rule_type]
+    for rule_type in word_count_dict.keys():
+        sum += word_count_dict[rule_type]
     prob = {}
-    for rule_type in word_count.keys():
-        prob[rule_type] = word_count[rule_type] / sum
+    for rule_type in word_count_dict.keys():
+        prob[rule_type] = word_count_dict[rule_type] / sum
 
     # entropyを求める
     entropy = 0.0
-    for rule_type in word_count.keys():
+    for rule_type in word_count_dict.keys():
         entropy -= prob[rule_type] * math.log(prob[rule_type])
     return entropy
 
@@ -90,7 +92,9 @@ def get_max_entropy_word(all_word_list, hidden_word_list):
     max_entropy = 0.0
     max_word = ""
     for word in all_word_list:
-        entropy = calc_entropy(word, hidden_word_list)
+        word_count_dict = get_word_count_dict(word, hidden_word_list)
+        entropy = calc_entropy(word_count_dict)
+        print("get_max_entropy", entropy, word)
         if entropy > max_entropy:
             max_entropy = entropy
             max_word = word
@@ -117,6 +121,8 @@ def load_word_list(filename):
     word_list = []
     ff = open(filename, 'r')
     for line in ff:
+        if (line[0] == "#"):
+            continue
         word_list.append(line.rstrip("\n"))
     return word_list
 
@@ -129,6 +135,8 @@ def get_rule_list():
         rule_list.append(rule)
     return rule_list
 
+# ALL_WORD_LIST = load_word_list("pokemon5.txt")
+# HIDDEN_WORD_LIST = load_word_list("pokemon5.txt")
 ALL_WORD_LIST = load_word_list("wordlist_all")
 HIDDEN_WORD_LIST = load_word_list("wordlist_hidden")
 main(ALL_WORD_LIST, HIDDEN_WORD_LIST, get_rule_list())
