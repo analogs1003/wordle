@@ -237,3 +237,7 @@ YWWGW: 1
 YYWYY: 1
 ```
 `qajaq`よりも`soara`の方がばらついていることがわかり、1手目に`qajaq`よりも`soara`を入力した方が早く正解にたどりつけそうなことがわかる
+
+## おまけ
+[POKEMON WORDLE](https://wordle.mega-yadoran.jp/)用の[データ](https://github.com/analogs1003/wordle/blob/main/pokemon5.txt)をつくってみました。
+データを差し替えることでPOKEMON WORDLEに対応できます。
