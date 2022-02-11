@@ -124,6 +124,7 @@ def load_word_list(filename):
         if (line[0] == "#"):
             continue
         word_list.append(line.rstrip("\n"))
+    ff.close()
     return word_list
 
 # 引数からrule_listを得る
