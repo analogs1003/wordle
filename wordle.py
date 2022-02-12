@@ -52,17 +52,16 @@ def get_word_count_dict(word, hidden_word_list):
 
 # word_count_dictからエントロピー（hidden_word_listのばらけぐあい）を求める
 def calc_entropy(word_count_dict):
-    # rule_typeごとの確率を求める
+    value_list = word_count_dict.values()
+    # hidden_word_listの合計値
     sum = 0
-    for rule_type in word_count_dict.keys():
-        sum += word_count_dict[rule_type]
-    prob = {}
-    for rule_type in word_count_dict.keys():
-        prob[rule_type] = word_count_dict[rule_type] / sum
-    # entropyを求める
+    for value in value_list:
+        sum += value
+    # 確率を求めてエントロピーを求める
     entropy = 0.0
-    for rule_type in word_count_dict.keys():
-        entropy -= prob[rule_type] * math.log(prob[rule_type])
+    for value in value_list:
+        prob = value / sum
+        entropy -= prob * math.log(prob)
     return entropy
 
 # all_word_listの中でentropyが最も大きくなる（hidden_word_listがばらける）単語を得る
