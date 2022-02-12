@@ -9,13 +9,13 @@ def calc_rule_type(answer_word, input_word):
     for ii in range(5):
         if input_word[ii] == char_list[ii]:
             rule_type[ii] = 'G'
-            char_list[ii] = '-'
+            char_list[ii] = '-'  # 正解で使った文字は使用不可
     # yellow
     for ii in range(5):
         for jj in range(5):
             if input_word[ii] == char_list[jj]:
                 rule_type[ii] = 'Y'
-                char_list[jj] = '-'
+                char_list[jj] = '-'  # 正解で使った文字は使用不可
                 break
     rule_type = ''.join(rule_type)
     return rule_type
