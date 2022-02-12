@@ -2,13 +2,6 @@ import unittest
 import wordle
 
 class TestWordle(unittest.TestCase):
-    def test_check_rule(self):
-        test_data_list = [
-            ("ultra", "aback", "YWWWW", True),
-            ("paste", "tooth", "WWWGW", True),
-            ("ultra", "tutor", "WYGWY", True),
-        ]
-
     def test_calc_rule_type(self):
         test_data_list = [
             ("ultra", "aback", "YWWWW"),
