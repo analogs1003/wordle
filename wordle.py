@@ -1,39 +1,31 @@
 import math
 import sys
 
-# wordがruleを満たしているか確認する
-def check_rule(word, rule):
-    rule_word = rule[0]
-    rule_type = rule[1]
+# input_wordを入力したときanswer_wordに対する結果を求める
+def calc_rule_type(answer_word, input_word):
+    char_list = list(answer_word)
+    rule_type = ['W','W','W','W','W']
+    # green
     for ii in range(5):
-        # GREEN: ii番目の文字がrule文字と一致 -> OK
-        if rule_type[ii] == 'G':
-            if word[ii] != rule_word[ii]:
-                return False
-        # YELLOW: ii番目の文字がrule文字と一致 -> NG, 他の位置で文字が一致 -> OK, 全位置で文字が不一致 -> NG
-        elif rule_type[ii] == 'Y':
-            if word[ii] == rule_word[ii]:
-                return False
-            count = 0
-            for jj in range(5):
-                if word[jj] == rule_word[ii]:
-                    count += 1
-            if count == 0:
-                return False
-        # WHITE: どこかの位置で文字が一致 -> NG
-        elif rule_type[ii] == 'W':
-            for jj in range(5):
-                if word[jj] == rule_word[ii]:
-                    return False
-        # OTHER: 
-        else:
-            return False
-    return True
+        if input_word[ii] == char_list[ii]:
+            rule_type[ii] = 'G'
+            char_list[ii] = '-'
+    # yellow
+    for ii in range(5):
+        for jj in range(5):
+            if input_word[ii] == char_list[jj]:
+                rule_type[ii] = 'Y'
+                char_list[jj] = '-'
+                break
+    rule_type = ''.join(rule_type)
+    return rule_type
 
 # wordがrule_listすべてを満たしているか確認する
 def check_rule_list(word, rule_list):
     for rule in rule_list:
-        if check_rule(word, rule) == False:
+        rule_word = rule[0]
+        rule_type = rule[1]
+        if calc_rule_type(word, rule_word) != rule_type:
             return False
     return True
 
@@ -45,21 +37,8 @@ def get_word_list(word_list, rule_list):
             tmp_word_list.append(word)
     return tmp_word_list
 
-# input_wordを入力したときanswer_wordに対する結果を求める
-def calc_rule_type(answer_word, input_word):
-    rule_type = ['W','W','W','W','W']
-    for ii in range(5):
-        if answer_word[ii] == input_word[ii]:
-            rule_type[ii] = 'G'
-        else:
-            for jj in range(5):
-                if answer_word[jj] == input_word[ii]:
-                    rule_type[ii] = 'Y'
-    rule_type = ''.join(rule_type)
-    return rule_type
-
+# rule_typeごとのhidden_wordを数える
 def get_word_count_dict(word, hidden_word_list):
-    # rule_typeごとのhidden_wordを数える
     word_count_dict = {}
     for hidden_word in hidden_word_list:
         # 正解がhidden_wordだったときwordを入力したときのrule_typeを求める
@@ -80,7 +59,6 @@ def calc_entropy(word_count_dict):
     prob = {}
     for rule_type in word_count_dict.keys():
         prob[rule_type] = word_count_dict[rule_type] / sum
-
     # entropyを求める
     entropy = 0.0
     for rule_type in word_count_dict.keys():
@@ -136,8 +114,9 @@ def get_rule_list():
         rule_list.append(rule)
     return rule_list
 
-# ALL_WORD_LIST = load_word_list("pokemon5.txt")
-# HIDDEN_WORD_LIST = load_word_list("pokemon5.txt")
-ALL_WORD_LIST = load_word_list("wordlist_all")
-HIDDEN_WORD_LIST = load_word_list("wordlist_hidden")
-main(ALL_WORD_LIST, HIDDEN_WORD_LIST, get_rule_list())
+if __name__ == "__main__":
+    # ALL_WORD_LIST = load_word_list("pokemon5.txt")
+    # HIDDEN_WORD_LIST = load_word_list("pokemon5.txt")
+    ALL_WORD_LIST = load_word_list("wordlist_all")
+    HIDDEN_WORD_LIST = load_word_list("wordlist_hidden")
+    main(ALL_WORD_LIST, HIDDEN_WORD_LIST, get_rule_list())
