@@ -37,7 +37,7 @@ flump 2.6015683031684986
 
 ## data
 
-使用しているデータ
+使用しているデータ（両方ともダウンロードしてください）
 
 - 登録されている単語一覧  
   https://github.com/alex1770/wordle/blob/main/wordlist_all
