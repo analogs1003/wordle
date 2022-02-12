@@ -44,10 +44,7 @@ def get_word_count_dict(word, hidden_word_list):
         # 正解がhidden_wordだったときwordを入力したときのrule_typeを求める
         rule_type = calc_rule_type(hidden_word, word)
         # rule_type別にword数を数える
-        if rule_type in word_count_dict:
-            word_count_dict[rule_type] += 1
-        else:
-            word_count_dict[rule_type] = 1
+        word_count_dict[rule_type] = word_count_dict.get(rule_type, 0) + 1
     return word_count_dict
 
 # word_count_dictからエントロピー（hidden_word_listのばらけぐあい）を求める
@@ -114,7 +111,7 @@ def get_rule_list():
     return rule_list
 
 if __name__ == "__main__":
-    # ALL_WORD_LIST = load_word_list("pokemon5.txt")
+    # LL_WORD_LIST = load_word_list("pokemon5.txt")
     # HIDDEN_WORD_LIST = load_word_list("pokemon5.txt")
     ALL_WORD_LIST = load_word_list("wordlist_all")
     HIDDEN_WORD_LIST = load_word_list("wordlist_hidden")
