@@ -2,6 +2,23 @@
 
 wordle を（最適に？）解くツール
 
+## data
+
+使用しているデータ（両方ともダウンロードしてください）
+
+- 登録されている単語一覧  
+  https://github.com/alex1770/wordle/blob/main/wordlist_all
+- 答えとして選ばれる単語一覧  
+  https://github.com/alex1770/wordle/blob/main/wordlist_hidden
+
+## install
+```
+$ git clone git@github.com:analogs1003/wordle.git
+$ cd wordle
+$ wget https://raw.githubusercontent.com/alex1770/wordle/main/wordlist_all
+$ wget https://raw.githubusercontent.com/alex1770/wordle/main/wordlist_hidden
+```
+
 ## usage
 
 ### format
@@ -17,6 +34,7 @@ G: GREEN
 Y: YELLOW
 W: WHITE
 ```
+
 
 ### samples
 
@@ -35,14 +53,6 @@ $ python3 wordle.py soare WWWYY tined WWWGW
 flump 2.6015683031684986
 ```
 
-## data
-
-使用しているデータ（両方ともダウンロードしてください）
-
-- 登録されている単語一覧  
-  https://github.com/alex1770/wordle/blob/main/wordlist_all
-- 答えとして選ばれる単語一覧  
-  https://github.com/alex1770/wordle/blob/main/wordlist_hidden
 
 ## 解き方
 
