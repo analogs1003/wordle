@@ -12,7 +12,7 @@ def calc_rule_type(answer_word, input_word):
     # yellow
     for ii in range(5):
         for jj in range(5):
-            if input_word[ii] == char_list[jj]:
+            if rule_type[ii] != 'G' and input_word[ii] == char_list[jj]:
                 rule_type[ii] = 'Y'
                 char_list[jj] = '-'
                 break

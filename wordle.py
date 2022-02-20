@@ -13,7 +13,7 @@ def calc_rule_type(answer_word, input_word):
     # yellow
     for ii in range(5):
         for jj in range(5):
-            if input_word[ii] == char_list[jj]:
+            if rule_type[ii] != 'G' and input_word[ii] == char_list[jj]:
                 rule_type[ii] = 'Y'
                 char_list[jj] = '-'  # 正解で使った文字は使用不可
                 break
@@ -111,7 +111,7 @@ def get_rule_list():
     return rule_list
 
 if __name__ == "__main__":
-    # LL_WORD_LIST = load_word_list("pokemon5.txt")
+    # ALL_WORD_LIST = load_word_list("pokemon5.txt")
     # HIDDEN_WORD_LIST = load_word_list("pokemon5.txt")
     ALL_WORD_LIST = load_word_list("wordlist_all")
     HIDDEN_WORD_LIST = load_word_list("wordlist_hidden")
