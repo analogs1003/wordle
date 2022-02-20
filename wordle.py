@@ -65,14 +65,16 @@ def calc_entropy(word_count_dict):
 def get_max_entropy_word(all_word_list, hidden_word_list):
     max_entropy = 0.0
     max_word = ""
+    max_word_count_dict = ()
     for word in all_word_list:
         word_count_dict = get_word_count_dict(word, hidden_word_list)
         entropy = calc_entropy(word_count_dict)
-        print("get_max_entropy", entropy, word)
+        # print("get_max_entropy", entropy, word)
         if entropy > max_entropy:
             max_entropy = entropy
             max_word = word
-    return (max_word, max_entropy)
+            max_word_count_dict = word_count_dict
+    return (max_word, max_entropy, max_word_count_dict)
 
 def main(all_word_list, hidden_word_list, rule_list):
     # rule_listを満たすhidden_word_listを得る
@@ -80,14 +82,16 @@ def main(all_word_list, hidden_word_list, rule_list):
     hidden_word_list_len = len(hidden_word_list)
     if hidden_word_list_len == 0:
         print("None")
-    elif len(hidden_word_list) == 1:
+    elif hidden_word_list_len == 1:
         print(hidden_word_list[0])
     else:
-        if len(hidden_word_list) < 10:
-            for hidden_word in hidden_word_list:
-                print(hidden_word)
+        # print(' '.join(hidden_word_list))
         # entropyが最も大きくなる単語を得る
-        (word, entropy) = get_max_entropy_word(all_word_list, hidden_word_list)
+        print(len(hidden_word_list), "candidates remain")
+        (word, entropy, word_count_dict) = get_max_entropy_word(all_word_list, hidden_word_list)
+        # 残りのばらつき具合を表示
+        # for rule_type in word_count_dict:
+        #     print(rule_type, word_count_dict[rule_type])
         print(word, entropy)
     return
 
