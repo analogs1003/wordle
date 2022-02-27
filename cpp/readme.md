@@ -1,6 +1,6 @@
 # wordle.cpp
 
-wordle solver
+wordle solver  
 wordle を（最適に？）解くツール (c++版)
 
 - 高速化のため c++化
